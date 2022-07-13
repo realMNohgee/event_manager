@@ -56,6 +56,8 @@ def exercise_output(contents)
 
     save_thank_you_letter(id,form_letter)
   end
+end
+
 
   # something to pull the phone numbers from input file and normalize removing unwanted charaters #
   # also runs normalized numbers through check method and outs first name with number #
@@ -77,4 +79,19 @@ def exercise_output(contents)
       print phone_number
     end
   end
-  
+
+def registration_time(contents)
+  time_array = []
+  contents.each do |row|
+    date_time = DateTime.strptime(row[:regdate], '%m/%d/%y %k')
+    time_array << date_time.hour
+  end
+
+    hour_dist = Hash.new(0)
+    time_array.each |hour|
+      hour_dist[hour] += 1
+  end
+  puts hour_dist
+end
+
+
