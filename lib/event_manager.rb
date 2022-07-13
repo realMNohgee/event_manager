@@ -67,4 +67,14 @@ def exercise_output(contents)
     end
   end
 
-  def
+  def check_phone_number(phone_number)
+    case 
+    when phone_number.length < 10 || phone_number.length > 11
+      print 'invaild number'
+    when phone_number.length == 11 
+      phone_number.start_with?('1') ? (print phone_number[1..-1]) : (print 'invalid number')
+    else
+      print phone_number
+    end
+  end
+  
