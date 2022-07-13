@@ -44,3 +44,15 @@ def clean_numbers(phone_number)
 end
 
 def get_reg_hour(reg_date)
+  reg_time = reg_date.split[1]
+  reg_time.split(':')[0]
+end
+
+def get_reg_day_of_week(reg_date)
+  reg_date = reg_date.split[0].split('/')
+  stuff = Date.new(reg_date[2].to_i, reg_date[0].to_i, reg_date[1].to_i)
+  stuff.strftime('%A')
+end
+
+puts 'Event Manager Initialized'
+
