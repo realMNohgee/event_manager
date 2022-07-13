@@ -56,3 +56,42 @@ end
 
 puts 'Event Manager Initialized'
 
+contents = CSV.open(
+  'event_attendees.csv',
+  headers: true,
+  header_converters: :symbol
+)
+
+template_letter = File.read('form_letter.erb')
+erb_template = ERB.new template_letter
+
+hour_tracker = []
+dow_tracker = []
+# dow = day of week
+
+contents.each do |row|
+  id = row[0]
+  name = row[:first_name]
+
+  zipcode = clean_zipcode(row[:zipcode])
+
+  legislators = legislators_by_zipcode(zipcode)
+
+  reg_hour = get_reg_hour(row[:regdate])
+  hour_tracker << reg_hour
+
+  dow = get_reg_day_of_week(row[:regdate])
+  dow_tracker << dow
+
+  form_letter = erb_template.result(binding)
+
+  save_thank_you_letter(id, form_letter)
+end
+
+hour_count = Hash.new(0)
+hour_tracker.each { |hour\ hour_count[hour] += 1 }
+p hour_count.sort_by { |hour, frequency| frequency }.reverse
+
+day_count = Hash.new(0)
+dow_tracker.each { |day| day_count[day] += 1 }
+p day_count.sort_by { |day, frequency| frequency }.reverse
