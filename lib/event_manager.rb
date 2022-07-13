@@ -38,9 +38,10 @@ def clean_numbers(phone_number)
     phone_number
   elsif phone_number.length == 11 && phone_number[0] == '1'
     phone_number[1..-1]
-  else
+  elsif
     'The phone number you entered was not valid!'
   end
+  p phone_number
 end
 
 def get_reg_hour(reg_date)
@@ -53,6 +54,7 @@ def get_reg_day_of_week(reg_date)
   stuff = Date.new(reg_date[2].to_i, reg_date[0].to_i, reg_date[1].to_i)
   stuff.strftime('%A')
 end
+
 
 puts 'Event Manager Initialized'
 
@@ -77,6 +79,8 @@ contents.each do |row|
 
   legislators = legislators_by_zipcode(zipcode)
 
+  phone_number = clean_numbers(row[:homephone])
+
   reg_hour = get_reg_hour(row[:regdate])
   hour_tracker << reg_hour
 
@@ -87,6 +91,7 @@ contents.each do |row|
 
   save_thank_you_letter(id, form_letter)
 end
+
 
 hour_count = Hash.new(0)
 hour_tracker.each { |hour| hour_count[hour] += 1 }
