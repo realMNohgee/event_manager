@@ -89,7 +89,7 @@ contents.each do |row|
 end
 
 hour_count = Hash.new(0)
-hour_tracker.each { |hour\ hour_count[hour] += 1 }
+hour_tracker.each { |hour| hour_count[hour] += 1 }
 p hour_count.sort_by { |hour, frequency| frequency }.reverse
 
 day_count = Hash.new(0)
