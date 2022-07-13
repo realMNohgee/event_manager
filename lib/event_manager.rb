@@ -94,4 +94,21 @@ def registration_time(contents)
   puts hour_dist
 end
 
+def registration_day(contents)
+  day_array = []
+  contents.each do |row|
+    date_time = DateTime.strptime(row[:regdate], '%m/%d/%y')
+    day_array << date_time.strftime('%A')
+  end
+
+  day_dist = Hash.new(0)
+  day_array.each do |day|
+    day_dist[day] += 1
+  end
+  puts day_dist
+end
+
+puts 'The phone numbers are as follows:'
+phone_numbers(contents)
+
 
