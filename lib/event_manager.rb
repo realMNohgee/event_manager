@@ -59,3 +59,12 @@ def exercise_output(contents)
 
   # something to pull the phone numbers from input file and normalize removing unwanted charaters #
   # also runs normalized numbers through check method and outs first name with number #
+  # validate and correct numbers #
+  def phone_numbers(contents)
+    contents.each do |row|
+      phone_number = row[:home_phone].tr('()-." "', '')
+      puts "#{check_phone_number(phone_number)}: #{row[:first_name]}"
+    end
+  end
+
+  def
